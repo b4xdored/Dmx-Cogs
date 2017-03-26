@@ -198,8 +198,7 @@ class General:
             payload = {'search_query': " ".join(query), 'hl': 'en'}
             headers = {'user-agent': 'Red-cog/1.0'}
             conn = aiohttp.TCPConnector(verify_ssl=False)
-            session = aiohttp.ClientSession(connector=conn)
-            async with session.get(url, params=payload, headers=headers) as r:
+            session = aiohttp.ClientSession(connector=conn)            async with session.get(url, params=payload, headers=headers) as r:
                 result = await r.text()
             session.close()
             yt_find = re.findall(r'href=\"\/watch\?v=(.{11})', result)
@@ -426,20 +425,7 @@ class General:
             for x in list(servers[server].emojis):
                 msg += "\n\t" + str(x.name)
             await self.bot.say(msg + "```")
-
-    @commands.command()
-    async def penis(self, user : discord.Member):
-        """Detects user's penis length
-        This is 100% accurate."""
-        if user.id == "187570149207834624":
-            await self.bot.say("Dis penis too long 2 measure ( ͡° ͜ʖ ͡°)\n\nJk he has a micro pp")
-            return
-
-        random.seed(user.id)
-        p = "8" + "="*random.randint(0, 50) + "D"
-        await self.bot.say("Size: " + p)
-
-
+            
     @commands.command(pass_context=True)
     async def quote(self, ctx, message_id = None):
         """Quotes a Message. If not specified, I will pick one for you"""
